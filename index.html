@@ -755,6 +755,7 @@
     }
     .phone-scroll-hint svg { flex-shrink: 0; }
 
+
     /* ── HERO PORTRAIT ── */
     .hero-portrait {
       position: absolute; right: 0; bottom: 0;
@@ -1090,6 +1091,7 @@
       <div class="hero-stat"><div class="num">∞</div><div class="lbl">Eye for Detail</div></div>
     </div>
 
+
     <div class="scroll-hint">
       <div class="scroll-hint-line"></div>
       Scroll to explore
@@ -1141,6 +1143,7 @@
           foster a culture of design excellence. I consider the nuances of design to be crucial
           when creating truly <strong>intuitive products</strong>.
         </p>
+        <p class="reveal rd2">I'm a proud father to a fantastic daughter. I love cars, fashion, art, music, food, and of course good design. I'm inspired by many people — from the amazing Italian automotive designer <strong>Walter de Silva</strong> to the legendary Apple product designer <strong>Jony Ive</strong>. I find beauty in almost everything, but I'm also a problem solver, so usability pioneers such as <strong>Dr. Jakob Nielsen</strong> equally inspire and influence the work I do.</p>
         <div class="skills-row reveal rd3">
           <span class="stag a">UX Design</span>
           <span class="stag a">Product Strategy</span>
@@ -2805,7 +2808,7 @@
     // Collect all parallax targets
     const parallaxImacs  = document.querySelectorAll('.parallax-imac');
     const parallaxPhones = document.querySelectorAll('.parallax-phone');
-    const portrait       = document.getElementById('hero-portrait');
+    const portrait = document.getElementById('hero-portrait');
 
     function getRelativeProgress(el) {
       const rect = el.getBoundingClientRect();
