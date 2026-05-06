@@ -136,7 +136,7 @@
       background-repeat: repeat; background-size: 200px;
     }
 
-    .hero-content { position: relative; z-index: 2; max-width: 920px; }
+    .hero-content { position: relative; z-index: 2; max-width: 680px; }
 
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 12px;
@@ -759,36 +759,20 @@
     }
     .phone-scroll-hint svg { flex-shrink: 0; }
 
-
-    /* ── HERO PORTRAIT ── */
-    .hero-portrait {
-      position: absolute; right: 0; bottom: 0;
-      width: clamp(380px, 40vw, 660px);
-      height: 100%; z-index: 1;
-      display: flex; align-items: flex-end; justify-content: flex-end;
-      pointer-events: none;
+    /* ── HERO PHOTO ── */
+    .hero-photo {
+      position: absolute;
+      left: 50%; bottom: 0;
+      transform: translateX(-50%);
+      width: clamp(500px, 52vw, 820px);
+      z-index: 2; pointer-events: none;
+      opacity: 0; animation: fadeUp .9s 1.0s forwards;
     }
-    .hero-portrait::before {
-      content: ''; position: absolute; bottom: 0; right: 12%;
-      width: 60%; height: 65%;
-      background: radial-gradient(ellipse at 50% 85%, rgba(0,255,204,.22) 0%, rgba(184,255,0,.07) 50%, transparent 75%);
-      filter: blur(50px); z-index: 0;
+    .hero-photo img {
+      width: 100%; height: auto; display: block;
+      mix-blend-mode: screen;
     }
-    .hero-portrait img {
-      position: relative; z-index: 1;
-      width: 100%; height: 100%;
-      object-fit: contain; object-position: bottom right;
-      filter: hue-rotate(170deg) saturate(1.5) brightness(1.08) contrast(1.05);
-      -webkit-mask-image:
-        linear-gradient(to right, transparent 0%, black 22%, black 82%, transparent 100%),
-        linear-gradient(to top, black 0%, black 65%, transparent 100%);
-      -webkit-mask-composite: destination-in;
-      mask-image:
-        linear-gradient(to right, transparent 0%, black 22%, black 82%, transparent 100%),
-        linear-gradient(to top, black 0%, black 65%, transparent 100%);
-      mask-composite: intersect;
-      opacity: .9;
-    }
+    @media (max-width: 900px) { .hero-photo { display: none; } }
 
     /* ── PARALLAX: iMac and Phone outer wrappers ── */
     .parallax-imac  { will-change: transform; }
@@ -881,7 +865,7 @@
       nav { padding: 18px 24px; }
       nav.scrolled { padding: 14px 24px; }
       .nav-links { display: none; }
-      #hero { padding: 100px 24px 60px; }
+      #hero { padding: 100px 24px 60px; grid-template-columns: 1fr; }
       .hero-stats { right: 24px; }
       #about { padding: 80px 24px; }
       .about-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -1084,9 +1068,9 @@
       </div>
     </div>
 
-    <!-- Portrait -->
-    <div class="hero-portrait" id="hero-portrait">
-      <img src="assets/portrait.png" alt="Tony Bland — Cyberpunk portrait">
+    <!-- Tony photo -->
+    <div class="hero-photo" id="hero-photo">
+      <img src="assets/tony-photo.png" alt="Tony Bland">
     </div>
 
     <div class="hero-stats">
@@ -2812,7 +2796,7 @@
     // Collect all parallax targets
     const parallaxImacs  = document.querySelectorAll('.parallax-imac');
     const parallaxPhones = document.querySelectorAll('.parallax-phone');
-    const portrait = document.getElementById('hero-portrait');
+    const heroPhoto = document.getElementById('hero-photo');
 
     function getRelativeProgress(el) {
       const rect = el.getBoundingClientRect();
@@ -2827,17 +2811,16 @@
       bar.style.width = ((s / max) * 100) + '%';
       nav.classList.toggle('scrolled', s > 80);
 
-      // ── Hero content + portrait parallax ──
+      // ── Hero parallax ──
       if (s < window.innerHeight * 1.5) {
         const hc = document.getElementById('hero-content');
         if (hc) {
           hc.style.transform = `translateY(${s * 0.28}px)`;
           hc.style.opacity   = Math.max(0, 1 - s / (window.innerHeight * 0.8));
         }
-        if (portrait) {
-          // Portrait drifts slower than content — floats upward gently
-          portrait.style.transform = `translateY(${s * 0.14}px)`;
-          portrait.style.opacity   = Math.max(0, 1 - s / (window.innerHeight * 0.9));
+        if (heroPhoto) {
+          heroPhoto.style.transform = `translateY(${s * 0.11}px)`;
+          heroPhoto.style.opacity   = Math.max(0, 1 - s / (window.innerHeight * 0.88));
         }
         document.getElementById('orb1').style.transform = `translateY(${s * 0.06}px)`;
         document.getElementById('orb2').style.transform = `translateY(${s * 0.10}px)`;
