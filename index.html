@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tony Bland</title>
+  <title>Tony Bland — Product UX Design Leader</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
@@ -33,6 +33,10 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    /* Consistent scroll anchor offset — accounts for fixed nav height */
+    #about, #resume, #work-desktop, #work-mobile, #contact {
+      scroll-margin-top: 0;
+    }
     body {
       background: var(--bg);
       color: var(--text);
@@ -75,10 +79,14 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 28px 64px;
       display: flex; align-items: center; justify-content: space-between;
-      transition: all .4s ease;
+      transition: background .25s ease, backdrop-filter .25s ease,
+                  padding .25s ease, border-color .25s ease;
+      background: rgba(5,8,15,0);
+      backdrop-filter: blur(0px);
+      border-bottom: 1px solid transparent;
     }
     nav.scrolled {
-      background: rgba(5,8,15,.88);
+      background: rgba(5,8,15,.92);
       backdrop-filter: blur(24px) saturate(180%);
       padding: 18px 64px;
       border-bottom: 1px solid var(--border);
@@ -253,7 +261,7 @@
 
     /* ── ABOUT ── */
     #about {
-      padding: 130px 64px;
+      padding: 90px 64px;
       background: linear-gradient(135deg, rgba(0,255,204,.02) 0%, transparent 50%, rgba(255,59,92,.02) 100%);
     }
     .about-inner {
@@ -603,7 +611,7 @@
     .ip-act  { position: absolute; left: -3px; top: 12%; width: 3px; height: 24px; background: linear-gradient(270deg,#2C2C2E,#3C3C3E); border-radius: 2px 0 0 2px; }
 
     /* ── DESKTOP WORK SECTION ── */
-    #work-desktop { padding: 90px 64px 100px; }
+    #work-desktop { padding: 90px 64px; }
     .work-header {
       display: flex; flex-direction: column; align-items: flex-start;
       max-width: 1400px; margin: 0 auto 90px;
@@ -614,15 +622,15 @@
     }
 
     /* Featured alternating layout */
-    .featured-list { max-width: 1400px; margin: 0 auto 80px; display: flex; flex-direction: column; gap: 110px; }
+    .featured-list { max-width: 1400px; margin: 0 auto 0; display: flex; flex-direction: column; gap: 80px; }
 
     .feat-project {
-      display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center;
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: start;
     }
     .feat-project.rev .imac-outer { order: 2; }
     .feat-project.rev .feat-info  { order: 1; }
 
-    .feat-info { display: flex; flex-direction: column; gap: 20px; }
+    .feat-info { display: flex; flex-direction: column; gap: 20px; padding-top: 48px; }
     .proj-tag {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 6px 16px; border-radius: 100px;
@@ -672,7 +680,7 @@
     /* ── MOBILE SECTION ── */
     /* ── MOBILE FEATURED LAYOUT ── */
     #work-mobile {
-      padding: 60px 64px 110px;
+      padding: 90px 64px;
       position: relative; overflow: hidden;
     }
     #work-mobile::before {
@@ -697,7 +705,10 @@
       display: flex; flex-direction: column; gap: 100px;
     }
     .feat-phone {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+      display: grid; grid-template-columns: 0.6fr 1fr; gap: 48px; align-items: start;
+    }
+    .feat-phone.rev {
+      grid-template-columns: 1fr 0.6fr;
     }
     .feat-phone.rev .phone-col { order: 2; }
     .feat-phone.rev .feat-info  { order: 1; }
@@ -780,7 +791,7 @@
     .parallax-phone { will-change: transform; }
 
     /* ── CONTACT ── */
-    #contact { padding: 120px 64px; position: relative; overflow: hidden; }
+    #contact { padding: 90px 64px; position: relative; overflow: hidden; }
     #contact::before {
       content: ''; position: absolute; inset: 0;
       background: radial-gradient(ellipse at 70% 50%, rgba(0,255,204,.04) 0%, transparent 60%);
@@ -867,15 +878,15 @@
       nav.scrolled { padding: 14px 24px; }
       .nav-links { display: none; }
       #hero { padding: 100px 24px 60px; grid-template-columns: 1fr; }
-      .hero-stats { right: 24px; }
+      .hero-stats { display: none; }
       #about { padding: 80px 24px; }
       .about-inner { grid-template-columns: 1fr; gap: 48px; }
-      #work-desktop { padding: 60px 24px 80px; }
+      #work-desktop { padding: 60px 24px; }
       .work-header { margin-bottom: 50px; }
       .proj-grid { grid-template-columns: 1fr; }
       .feat-phone { grid-template-columns: 1fr; gap: 48px; }
       .feat-phone.rev .phone-col, .feat-phone.rev .feat-info { order: unset; }
-      #work-mobile { padding: 60px 24px 80px; }
+      #work-mobile { padding: 60px 24px; }
       .mobile-header-row { margin-bottom: 36px; }
       .feat-iphone { width: 260px; }
       .feat-iphone-screen { height: 480px; }
@@ -885,7 +896,7 @@
       footer { flex-direction: column; gap: 16px; padding: 28px 24px; text-align: center; }
     }
     @media (max-width: 480px) {
-      .hero-stats { display: none; }
+      /* hero-stats already hidden at 768px */
       .feat-iphone { width: 220px; }
       .feat-iphone-screen { height: 420px; }
       .stat-cards { grid-template-columns: 1fr 1fr; }
@@ -895,7 +906,7 @@
        RESUME SECTION
     ══════════════════════════════════════════ */
     #resume {
-      padding: 120px 64px 130px;
+      padding: 90px 64px;
       background: linear-gradient(160deg, rgba(0,255,204,.02) 0%, transparent 40%, rgba(255,59,92,.02) 100%);
       position: relative;
     }
@@ -1022,6 +1033,7 @@
       #resume { padding: 80px 24px 100px; }
       .resume-header-row { margin-bottom: 48px; }
     }
+  </style>
   </style>
 </head>
 <body>
@@ -1891,7 +1903,22 @@
     </div>
   </div>
 
-  <!-- ═══════════════════ CASE STUDY DATA ═══════════════════ -->
+
+  <div id="lightbox">
+    <div class="lb-bg" onclick="closeLb()"></div>
+    <div class="lb-panel">
+      <div class="lb-header">
+        <div class="lb-title" id="lb-title"></div>
+        <div class="lb-counter" id="lb-counter"></div>
+        <button class="lb-close" onclick="closeLb()" title="Close (Esc)">✕</button>
+      </div>
+      <div class="lb-body" id="lb-body">
+        <img id="lb-img" src="" alt="">
+      </div>
+      <div class="lb-footer" id="lb-footer"></div>
+    </div>
+  </div>
+
   <script>
     const CASE_STUDIES = {
 
@@ -2540,20 +2567,6 @@
       }
     });
   </script>
-  <div id="lightbox">
-    <div class="lb-bg" onclick="closeLb()"></div>
-    <div class="lb-panel">
-      <div class="lb-header">
-        <div class="lb-title" id="lb-title"></div>
-        <div class="lb-counter" id="lb-counter"></div>
-        <button class="lb-close" onclick="closeLb()" title="Close (Esc)">✕</button>
-      </div>
-      <div class="lb-body" id="lb-body">
-        <img id="lb-img" src="" alt="">
-      </div>
-      <div class="lb-footer" id="lb-footer"></div>
-    </div>
-  </div>
 
   <script>
     // ═══════════════════════════════════════════════════
@@ -2761,9 +2774,9 @@
     const ring   = document.getElementById('cursor-ring');
 
     // Disable custom cursor on touch/pointer-coarse devices (iPad, mobile)
-    const isTouch = window.matchMedia('(pointer: coarse)').matches
-                 || ('ontouchstart' in window)
-                 || (navigator.maxTouchPoints > 0);
+    // Only disable custom cursor on pure touch devices with no fine pointer
+    // iPad + Magic Keyboard reports pointer:fine so cursor stays active there
+    const isTouch = window.matchMedia('(pointer: coarse) and (hover: none)').matches;
 
     if (isTouch) {
       cursor.style.display = 'none';
@@ -2840,18 +2853,19 @@
       }
 
       // ── iMac parallax: rises as you scroll into view ──
-      parallaxImacs.forEach(el => {
+      // ── iMac parallax — aggressive lift ──
+      parallaxImacs.forEach((el, i) => {
         const p = getRelativeProgress(el);
-        if (p < -0.1 || p > 1.1) return; // out of view
-        const lift = p * -55; // floats up to 55px as you scroll past
+        if (p < -0.15 || p > 1.15) return;
+        const lift = p * -60;
         el.style.transform = `translateY(${lift}px)`;
       });
 
-      // ── Phone parallax: slightly different speed for visual interest ──
-      parallaxPhones.forEach(el => {
+      // ── Phone parallax — faster lift ──
+      parallaxPhones.forEach((el, i) => {
         const p = getRelativeProgress(el);
-        if (p < -0.1 || p > 1.1) return;
-        const lift = p * -40;
+        if (p < -0.15 || p > 1.15) return;
+        const lift = p * -90;
         el.style.transform = `translateY(${lift}px)`;
       });
 
@@ -2878,6 +2892,7 @@
     });
     // ── AUTO-UPDATE COPYRIGHT YEAR ──
     document.getElementById('copy-year').textContent = new Date().getFullYear();
+  </script>
   </script>
 </body>
 </html>
