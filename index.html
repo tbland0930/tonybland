@@ -125,6 +125,8 @@
     }
     .nav-links a:hover { color: var(--accent); }
     .nav-links a:hover::after { width: 100%; }
+    .nav-links a.nav-active { color: var(--accent); }
+    .nav-links a.nav-active::after { width: 100%; }
     .nav-cta {
       background: var(--accent) !important; color: var(--bg) !important;
       padding: 10px 26px !important; border-radius: 100px;
@@ -3080,6 +3082,25 @@
         }
       });
     }
+
+    // ── ACTIVE NAV STATE ──
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    const sections = document.querySelectorAll('#about, #resume, #work-desktop, #work-mobile, #contact');
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.remove('nav-active'));
+          const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('nav-active');
+        }
+      });
+    }, {
+      rootMargin: '-80px 0px -50% 0px',
+      threshold: 0
+    });
+
+    sections.forEach(s => navObserver.observe(s));
 
     // ── AUTO-UPDATE COPYRIGHT YEAR ──
     document.getElementById('copy-year').textContent = new Date().getFullYear();
