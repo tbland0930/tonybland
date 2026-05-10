@@ -825,6 +825,12 @@
     /* Shimmer sweep overlay */
     @media (max-width: 900px) { .hero-photo { display: none; } }
 
+    /* ── iPad Pro 12.9" — raise hero elements without affecting desktop ── */
+    @media (min-width: 901px) and (max-width: 1400px) and (pointer: fine) {
+      .hero-stats { bottom: 140px; }
+      .hero-photo { bottom: 100px; }
+    }
+
     /* ── PARALLAX: iMac and Phone outer wrappers ── */
     .parallax-imac  { will-change: transform; }
     .parallax-phone { will-change: transform; }
