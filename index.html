@@ -825,18 +825,10 @@
     /* Shimmer sweep overlay */
     @media (max-width: 900px) { .hero-photo { display: none; } }
 
-    /* ── iPad Pro 12.9" — vertically center hero elements in viewport ── */
-    @media (min-width: 901px) and (max-width: 1400px) {
-      .hero-stats {
-        bottom: auto;
-        top: 50vh;
-        transform: translateY(-50%);
-      }
-      .hero-photo {
-        bottom: auto;
-        top: 50vh;
-        transform: translate(-50%, -50%);
-      }
+    /* ── iPad Pro 12.9" — raise hero elements without affecting desktop ── */
+    @media (min-width: 901px) and (max-width: 1400px) and (pointer: fine) {
+      .hero-stats { bottom: 140px; }
+      .hero-photo { bottom: 100px; }
     }
 
     /* ── PARALLAX: iMac and Phone outer wrappers ── */
