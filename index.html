@@ -278,8 +278,38 @@
     /* ── ABOUT ── */
     #about {
       padding: 90px 64px;
-      background: linear-gradient(135deg, rgba(0,255,204,.02) 0%, transparent 50%, rgba(255,59,92,.02) 100%);
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
     }
+
+    /* ── ABOUT VIDEO BG ── */
+    .about-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.12;
+      z-index: 0;
+    }
+    /* Fade to dark at the bottom */
+    .about-video-fade {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 45%;
+      background: linear-gradient(to bottom, transparent 0%, var(--bg) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    /* Also fade top edge slightly */
+    .about-video-fade-top {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 20%;
+      background: linear-gradient(to top, transparent 0%, var(--bg) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    /* Ensure about content sits above video */
+    .about-inner { position: relative; z-index: 2; }
+    @media (max-width: 768px) { .about-video { display: none; } }
     .about-inner {
       display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
       align-items: start; max-width: 1400px; margin: 0 auto;
@@ -1197,6 +1227,13 @@
 
   <!-- ═══════════════════ ABOUT ═══════════════════ -->
   <section id="about">
+    <!-- Background video — place about-me-motion.mp4 in assets/ folder -->
+    <video class="about-video" autoplay muted loop playsinline>
+      <source src="assets/about-me-motion.mp4" type="video/mp4">
+      <source src="assets/about-me-motion.mov" type="video/quicktime">
+    </video>
+    <div class="about-video-fade-top"></div>
+    <div class="about-video-fade"></div>
     <div class="about-inner">
 
       <div class="about-left">
