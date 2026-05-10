@@ -3093,11 +3093,14 @@
           navLinks.forEach(link => link.classList.remove('nav-active'));
           const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
           if (active) active.classList.add('nav-active');
+        } else {
+          const link = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+          if (link) link.classList.remove('nav-active');
         }
       });
     }, {
-      rootMargin: '-80px 0px -50% 0px',
-      threshold: 0
+      rootMargin: '-80px 0px -60% 0px',
+      threshold: 0.15
     });
 
     sections.forEach(s => navObserver.observe(s));
