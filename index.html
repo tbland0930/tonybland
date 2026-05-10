@@ -3089,18 +3089,18 @@
 
     const navObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        const link = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (!link) return;
         if (entry.isIntersecting) {
-          navLinks.forEach(link => link.classList.remove('nav-active'));
-          const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-          if (active) active.classList.add('nav-active');
+          navLinks.forEach(l => l.classList.remove('nav-active'));
+          link.classList.add('nav-active');
         } else {
-          const link = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-          if (link) link.classList.remove('nav-active');
+          link.classList.remove('nav-active');
         }
       });
     }, {
-      rootMargin: '-80px 0px -60% 0px',
-      threshold: 0.15
+      rootMargin: '-80px 0px -80% 0px',
+      threshold: 0
     });
 
     sections.forEach(s => navObserver.observe(s));
